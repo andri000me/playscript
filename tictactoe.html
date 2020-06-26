@@ -1,0 +1,179 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TicTacToe</title>
+<style>
+#box{
+	height: 300px;
+	width: 300px;
+	background: lightBlue;
+	border: black 1px solid;
+	position: relative;
+}
+#tap1{
+	width: 100px;height: 100px;
+	float: left;position: relative;
+}
+.front{
+	position: absolute;color: teal;
+	width: 100px;height: 100px;
+	border: 1px solid black;
+	box-sizing: border-box;
+	background: wheat;
+	backface-visibility: hidden;
+	transform: perspective(600px) rotateY(0deg);
+	transition: transform 1s linear 0s;
+}
+.back{
+	position: absolute;color: teal;
+	box-sizing: border-box;
+	width: 100px;height: 100px;
+	border: 1px solid black;
+	background: wheat;
+	backface-visibility: hidden;
+	transform: perspective(600px) rotateY(180deg);
+	transition: transform 1s linear 0s;
+	font-size: 75px;
+}
+.tap{
+	position: relative;
+	left: -100px;float: right;
+}
+</style>
+</head>
+<body>
+<div id="box">
+<div id="tap1" onclick="clickbut(1)">
+<button id="bt1f" class="front"></button>
+<button id="bt1b" class="back"></button>
+</div>
+
+<div id="tap1" onclick="clickbut(2)">
+<button id="bt2f" class="front"></button>
+<button id="bt2b" class="back"></button>
+</div>
+
+<div id="tap1" onclick="clickbut(3)">
+<button id="bt3f" class="front"></button>
+<button id="bt3b" class="back"></button>
+</div>
+
+<div id="tap1" onclick="clickbut(4)">
+<button id="bt4f" class="front"></button>
+<button id="bt4b" class="back"></button>
+</div>
+
+<div id="tap1" onclick="clickbut(5)">
+<button id="bt5f" class="front"></button>
+<button id="bt5b" class="back"></button>
+</div>
+
+<div id="tap1" onclick="clickbut(6)">
+<button id="bt6f" class="front"></button>
+<button id="bt6b" class="back"></button>
+</div>
+
+<div id="tap1" onclick="clickbut(7)">
+<button id="bt7f" class="front"></button>
+<button id="bt7b" class="back"></button>
+</div>
+
+<div id="tap1" onclick="clickbut(8)">
+<button id="bt8f" class="front"></button>
+<button id="bt8b" class="back"></button>
+</div>
+
+<div class="tap" onclick="clickbut(9)">
+<button id="bt9f" class="front"></button>
+<button id="bt9b" class="back"></button>
+</div>
+
+</div>
+<h2 id="ket">Giliran Player : x </h2>
+<button id="again" onclick="window.location.href ='tictactoe.html'">Play Again....???</button>
+</body>
+<script>
+var player ="x";
+function clickbut(x){
+	document.getElementById("bt"+x+"f").style.transform ="perspective(600px) rotateY(-180deg)"
+	document.getElementById("bt"+x+"b").style.transform ="perspective(600px) rotateY(0deg)"
+	document.getElementById("bt"+x+"b").innerHTML =player;
+	document.getElementById("bt"+x+"b").value =player;
+	document.getElementById("bt"+x+"b").disabled ="disabled";
+		var ket =document.getElementById("ket");
+	if(player == "x"){
+		ket.innerHTML ="Giliran Player : o";
+		ckwinner();
+		player ="o";
+	}
+	else{
+		ket.innerHTML ="Giliran Player : x";
+		ckwinner();
+		player ="x";
+	}
+}
+function ckwinner(){
+		if(document.getElementById("bt1b").value == player && document.getElementById("bt2b").value == player && document.getElementById("bt3b").value == player){
+		win(1,2,3);
+	}
+		else if(document.getElementById("bt4b").value == player && document.getElementById("bt5b").value == player && document.getElementById("bt6b").value == player){
+		win(4,5,6);
+	}
+	else if(document.getElementById("bt7b").value == player && document.getElementById("bt8b").value == player && document.getElementById("bt9b").value == player){
+		win(7,8,9);
+	}
+		else if(document.getElementById("bt1b").value == player && document.getElementById("bt5b").value == player && document.getElementById("bt9b").value == player){
+		win(1,5,9);
+	}
+		else if(document.getElementById("bt7b").value == player && document.getElementById("bt5b").value == player && document.getElementById("bt3b").value == player){
+		win(7,5,3);
+	}
+		else if(document.getElementById("bt1b").value == player && document.getElementById("bt4b").value == player && document.getElementById("bt7b").value == player){
+		win(1,4,7);
+	}
+		else if(document.getElementById("bt2b").value == player && document.getElementById("bt5b").value == player && document.getElementById("bt8b").value == player){
+		win(2,5,8);
+	}
+	else if(document.getElementById("bt3b").value == player && document.getElementById("bt6b").value == player && document.getElementById("bt9b").value == player){
+		win(3,6,9);
+	}
+	else if(document.getElementById("bt1b").disabled =="disabled" && document.getElementById("bt2b").disabled =="disabled" && document.getElementById("bt3b").disabled =="disabled" && document.getElementById("bt4b").disabled =="disabled" 
+		&& document.getElementById("bt5b").disabled =="disabled" && document.getElementById("bt6b").disabled =="disabled" && document.getElementById("bt7b").disabled =="disabled" && document.getElementById("bt8b").disabled =="disabled" && document.getElementById("bt9b").disabled =="disabled"){
+		ket.innerHTML ="🏳🚩🤑DRAW🤑🚩🏳";
+	}
+}
+function win(a,b,c){
+	ket.innerHTML ="🏅🏆Player <span id='spa'>"+player+"</span> Winner🎉🎁";
+	var spa =document.getElementById("spa");
+	 spa.style.color ="blue";
+ 	spa.style.fontSize ="50px";
+	for(i =1;i<10;i++){
+		document.getElementById("bt"+i+"f").disabled ="disabled";
+	}
+var x =1;
+function anime(){
+	if(x == 1){
+	document.getElementById("bt"+a+"b").style.background ="#ddd";
+	document.getElementById("bt"+b+"b").style.background ="#bbb";
+	document.getElementById("bt"+c+"b").style.background ="#999";
+	x =2;
+	}
+	else if(x == 2){
+	document.getElementById("bt"+c+"b").style.background ="#ddd";
+	document.getElementById("bt"+a+"b").style.background ="#bbb";
+	document.getElementById("bt"+b+"b").style.background ="#999";
+	x =3;
+	}
+	else if(x == 3){
+	document.getElementById("bt"+b+"b").style.background ="#ddd";
+	document.getElementById("bt"+c+"b").style.background ="#bbb";
+	document.getElementById("bt"+a+"b").style.background ="#999";
+	x =1;
+	}
+}
+setInterval(anime,400);
+}
+</script>
+</html>
+    
+    

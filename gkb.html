@@ -1,0 +1,78 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SuitGame</title>
+<style>
+html,body{
+	height: 100%;
+	margin: 0;
+	text-align: center;
+}
+#has{
+	margin: 50px;
+	padding: 50px;
+	background: brightube; 
+	color: gold;
+	font-size: 10px;
+}
+</style>
+</head>
+<body>
+<div id="has"></div>
+<script>
+var ask =true;
+var has =document.getElementById("has");
+while(ask){
+	var p =prompt("                   WILUJENG SUMPING KA SUITGAME\n\n Pilih:\n\n ~✂️Gunting✌(g)\n ~📄Kertas🖐(k)\n ~⚫Batu✊(b)")
+	var com =Math.random();
+	if(com<0.34){
+		com ="g";
+		comp ="✂️Gunting✌";
+	}
+	else if(com >=0.34 && com<0.67){
+		com ="k";
+		comp ="📄Kertas🖐";
+	}
+	else{
+		com ="b";
+		comp ="⚫Batu✊";
+	}
+
+var hasil ="";
+if(p == com){
+	if(p =="g"){
+		p ="✂️Gunting✌"
+	}
+	else if(p =="k"){
+		p ="📄Kertas🖐";
+	}
+	else if(p =="b"){
+		p ="⚫Batu✊";
+	}
+	hasil ="Cobian deui...";
+}
+else if(p=='g'){
+	p ="✂️Gunting✌";
+	hasil =(comp=='📄Kertas🖐') ? '🎉🏆Hore Meunang...🏅' : '🤣👎Ahh Elèh..🏳';
+}
+else if(p=='k'){
+	p ="📄Kertas🖐";
+	hasil =(comp=='✂️Gunting✌') ? '🤣👎Ahh Elèh..🏳' : '🎉🏆Hore Meunang...🏅';
+}
+else if(p=='b'){
+	p ="⚫Batu✊";
+	hasil =(comp=='📄Kertas🖐') ? '🤣👎Ahh Elèh..🏳' : '🎉🏆Hore Meunang...🏅';
+}
+else{
+	hasil ="Punten-punten yeuh Anjeun Salah Ngetik....."
+}
+alert ("Anjeun Milih: "+p+"\nKomputer Milih: "+comp+
+	"\nJadi hasilna: \n\n\n                "+hasil);
+	ask =confirm("Maèn deui...???");
+}
+
+alert("            Hatur nuhun tos maèn ieu game...");
+</script>
+</body>
+</html>
+    

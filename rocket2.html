@@ -1,0 +1,190 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RocketAsteroid</title>
+<link rel="stylesheet" href="assets/css/themify-icons.css">
+<style>
+body{
+	margin: 0;
+}
+#cvn{
+	width: 780px;
+	height: 600px;
+}
+.cont,#fire,#again{
+	position: fixed;
+	bottom: 350px;left: 15%;
+}
+.cont button,#fire,#again{
+	font-size: 50px;color: red;
+	padding: 10px 10px; 
+}
+.down,#up{
+	transform: translateX(7px);
+}
+.left{
+	transform: translateX(-60px);
+	display: inline-block;
+}
+#fire{
+	left: 70%;
+	bottom: 415px;
+}
+#again{
+	font-size: 25px;
+	position: fixed;
+	left: 39%;
+}
+</style>
+</head>
+<body>
+<canvas id="cvn"></canvas>
+<div class="cont">
+<button id="up" onclick="upx()"><i class="ti-arrow-circle-up"></i></button><br> 
+<div class="left">
+<button id="left" onclick="leftx()"><i class="ti-arrow-circle-left"></i></button>
+</div> 
+<button id="right" onclick="rightx()"><i class="ti-arrow-circle-right"></i></button><br>
+<div class="down">
+<button id="down" onclick="downx()"><i class="ti-arrow-circle-down"></i></button> 
+</div>
+</div>
+<button id="fire" onclick="firex()"><i class="ti-target"></i></button> 
+<button id="again" onclick='window.location.href="rocket2.html"'><i class="ti-reload"></i>  Maen deui..???</button> 
+<script>
+var bg =new Image();
+bg.src ="img/PicsArt_10-11-08.02.38-picsay.jpg";
+var plane =new Image();
+plane.src ="img/1540556030-picsay.png";
+var bulls =new Image();
+bulls.src ="img/1540556030.png";
+var stone =new Image();
+stone.src ="img/1543764300-picsay.png";
+var win =new Image();
+win.src ="img/1543796276-picsayz.png";
+var lose =new Image();
+lose.src ="img/1543796276-picsayx-picsay00.png";
+var splash =new Image();
+splash.src ="img/spall.jpg";
+
+
+
+var cvn =document.getElementById("cvn");
+	var ctx =cvn.getContext("2d");
+	
+	var cw =cvn.width;
+	var ch =cvn.height;
+var start =false;
+
+function upx(){
+	planes.y -=7;
+};
+function downx(){
+	planes.y +=7;
+};
+function rightx(){
+	planes.x +=8;
+};
+function leftx(){
+	planes.x -=7;
+};
+function firex(){
+	bull.push({
+		"x":planes.x+40,"y":planes.y+10,"w":10,"h":5
+	});
+}
+	var bull =[];
+	var meteor =[
+	{"x":320,"y":90,"w":30,"h":30},
+	{"x":200,"y":70,"w":30,"h":30},
+	{"x":239,"y":29,"w":30,"h":30},
+	{"x":398,"y":19,"w":30,"h":30},
+	{"x":309,"y":13,"w":30,"h":30},
+	{"x":398,"y":87,"w":30,"h":30},
+	{"x":498,"y":60,"w":30,"h":30}
+	
+	];
+	function asteroid(){
+		for(var i =0;i < meteor.length;i++){
+			var m =meteor[i];
+			ctx.drawImage(stone,m.x -=0.5,m.y);
+		
+		if((m.x < 0) || (m.x+100 < planes.x+planes.w && m.y+m.h > planes.y && m.y < planes.y+planes.h)){
+  		clearInterval(interval);
+  		ctx.clearRect(0,0,cw,ch);
+  		meteor.splice(i,7);
+  		bull.splice(i,99);
+  		console.log("eleh wa....!!! \n Eweuh Kabisa");
+  		ctx.drawImage(bg,this.x,this.y);
+  		ctx.drawImage(lose,0,40);
+  	}
+	}
+	}
+	function touch(){
+		for(var i =0;i < meteor.length;i++){
+			var m =meteor[i];
+		for(var j =0;j < bull.length;j++){
+			var p =bull[j];
+		if(p.x > m.x && p.y+p.h > m.y-5 && p.y < m.y+m.h){
+			meteor.splice(i,1);
+			bull.splice(j,1);
+		}
+		}
+	  }
+	  if(meteor.length <= 0){
+  		clearInterval(interval);
+  		ctx.clearRect(0,0,cw,ch);
+  		ctx.drawImage(bg,this.x,this.y);
+  		console.log("Menang wa maen deui moal...???");
+  		bull.splice(i,99);
+  		ctx.drawImage(win,0,0);
+  	}	  
+	}
+	function bullet(){
+		for(var i =0;i < bull.length;i++){
+			var p =bull[i];
+			ctx.drawImage(bulls,p.x +=3,p.y);
+		if(bull.x < 0){
+			bull.splice(i,1);
+		}
+		}
+	}
+	function back(){
+		this.x =0,this.y =0;
+		this.render =function(){
+			ctx.drawImage(bg,this.x--,this.y);
+			if(this.x == -300){
+				this.x =0;
+			}
+		}
+	}
+	var backs =new back();
+	
+	function planex(){
+		this.x =10,this.y =40,this.w =100,this.h =50;
+		this.render =function(){
+			ctx.drawImage(plane,this.x,this.y);
+		}
+	}
+	var planes =new planex();	
+	
+	function anim(){
+		ctx.save();
+		ctx.clearRect(0,0,cw,ch);
+		
+		backs.render();
+		planes.render();
+		asteroid();
+		bullet();
+		touch();
+		
+		ctx.restore();
+	}
+	var interval =setInterval(anim,30);
+</script>
+</body>
+</html>
+    
+    
+    
+    
